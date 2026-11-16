@@ -1,0 +1,200 @@
+{
+  "categories": [
+    {
+      "id": "clasicos",
+      "name": "Clásicos",
+      "description": "",
+      "palette": "lila-superficie",
+      "sizes": [
+        "36",
+        "37",
+        "38",
+        "39",
+        "40",
+        "41",
+        "42"
+      ]
+    },
+    {
+      "id": "plataforma",
+      "name": "Plataforma",
+      "description": "Más altura, mismo confort",
+      "palette": "lila-banner",
+      "sizes": [
+        "36",
+        "37",
+        "38",
+        "39",
+        "40",
+        "41"
+      ]
+    },
+    {
+      "id": "bolsos",
+      "name": "Bolsos",
+      "description": "",
+      "palette": "lila-claro",
+      "sizes": []
+    },
+    {
+      "id": "ninos",
+      "name": "Niños",
+      "description": "",
+      "palette": "amarillo",
+      "sizes": [
+        "24",
+        "25",
+        "26",
+        "27",
+        "28",
+        "29",
+        "30",
+        "31",
+        "32"
+      ]
+    }
+  ],
+  "products": [
+    {
+      "id": "p1",
+      "name": "Classic Clog",
+      "color": "Verde",
+      "body": "#35F411",
+      "cat": "clasicos",
+      "price": "",
+      "sizes": [
+        "37",
+        "38",
+        "39",
+        "41",
+        "42"
+      ],
+      "isNew": false,
+      "visible": true,
+      "photo": {
+        "src": "/img/verde.webp",
+        "width": 1100,
+        "height": 606
+      }
+    },
+    {
+      "id": "p2",
+      "name": "Classic Clog",
+      "color": "Rosado",
+      "body": "#F63EA7",
+      "cat": "clasicos",
+      "price": "",
+      "sizes": [
+        "36",
+        "37",
+        "38"
+      ],
+      "isNew": false,
+      "visible": true,
+      "photo": {
+        "src": "/img/rosado.webp",
+        "width": 1100,
+        "height": 591
+      }
+    },
+    {
+      "id": "p3",
+      "name": "Classic Clog",
+      "color": "Azul",
+      "body": "#0472FB",
+      "cat": "clasicos",
+      "price": "",
+      "sizes": [
+        "36",
+        "38",
+        "40"
+      ],
+      "isNew": false,
+      "visible": true,
+      "photo": {
+        "src": "/img/azul.webp",
+        "width": 1100,
+        "height": 603
+      }
+    },
+    {
+      "id": "p5",
+      "name": "Clog con tacón",
+      "color": "Gris",
+      "body": "#898B8F",
+      "cat": "plataforma",
+      "price": "",
+      "sizes": [
+        "38",
+        "40"
+      ],
+      "isNew": false,
+      "visible": true,
+      "photo": {
+        "src": "/img/gris.webp",
+        "width": 1100,
+        "height": 680
+      }
+    },
+    {
+      "id": "p6",
+      "name": "Mochila",
+      "color": "Rosado",
+      "body": "#EE99BF",
+      "cat": "bolsos",
+      "price": "",
+      "sizes": [],
+      "isNew": true,
+      "visible": true,
+      "photo": {
+        "src": "/img/mochila.webp",
+        "width": 1215,
+        "height": 900
+      }
+    },
+    {
+      "id": "p4",
+      "name": "Crush Clog",
+      "color": "Rosado",
+      "body": "#F663B5",
+      "cat": "plataforma",
+      "price": "",
+      "sizes": [
+        "37",
+        "39"
+      ],
+      "isNew": true,
+      "visible": true,
+      "photo": {
+        "src": "/img/crush.webp",
+        "width": 1100,
+        "height": 702
+      }
+    },
+    {
+      "id": "p7",
+      "name": "Classic Clog Kids",
+      "color": "Amarillo",
+      "body": "#FBCB04",
+      "cat": "ninos",
+      "price": "",
+      "sizes": [
+        "25",
+        "27",
+        "29"
+      ],
+      "isNew": false,
+      "visible": true,
+      "photo": {
+        "src": "/img/kids.webp",
+        "width": 1100,
+        "height": 609
+      }
+    }
+  ],
+  "featured": [
+    "p3",
+    "p4",
+    "p6"
+  ]
+}

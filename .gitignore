@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Datos de la tienda en ejecución (borrador y eventos); catalog.json sí se versiona
+data/db/draft.json
+data/db/events.json
+public/uploads/
