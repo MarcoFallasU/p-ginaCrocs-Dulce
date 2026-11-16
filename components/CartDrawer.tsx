@@ -1,13 +1,16 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { PRICE_PLACEHOLDER, byId, whatsappDigits } from "@/data/store";
+import { PRICE_PLACEHOLDER, whatsappDigits } from "@/data/store";
+import { useCatalog } from "@/context/CatalogContext";
 import { useList } from "@/context/ListContext";
+import { track } from "@/lib/track";
 import Button from "./Button";
 import { CloseIcon, PlaneIcon } from "./Icons";
 import ShoeTile from "./ShoeTile";
 
 export default function CartDrawer() {
+  const { byId } = useCatalog();
   const { items, drawerOpen, closeDrawer, remove } = useList();
   const panelRef = useRef<HTMLDivElement>(null);
   const lastFocus = useRef<HTMLElement | null>(null);
@@ -102,7 +105,7 @@ export default function CartDrawer() {
 
         <div style={{ flex: "none", padding: "16px 20px calc(16px + env(safe-area-inset-bottom))", borderTop: "1px solid #F3E8F9", display: "flex", flexDirection: "column", gap: 10, background: "#FFFFFF" }}>
           {entries.length > 0 && (
-            <Button href={waHref} target="_blank" rel="noopener" style={{ minHeight: 56 }}>
+            <Button href={waHref} target="_blank" rel="noopener" style={{ minHeight: 56 }} onClick={() => entries.forEach((l) => track({ type: "pedir", productId: l.pid, size: l.size }))}>
               <PlaneIcon />Pedir por WhatsApp
             </Button>
           )}

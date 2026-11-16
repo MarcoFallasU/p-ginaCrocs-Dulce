@@ -1,6 +1,9 @@
 "use client";
 
-import { LABELS, PRICE_PLACEHOLDER, type Product } from "@/data/store";
+import { useEffect, useRef } from "react";
+import { PRICE_PLACEHOLDER } from "@/data/store";
+import { trackOnce } from "@/lib/track";
+import type { StoreProduct } from "@/lib/types";
 import { useList } from "@/context/ListContext";
 import Button from "./Button";
 import { CheckIcon, PlusIcon } from "./Icons";
@@ -8,7 +11,7 @@ import ShoeTile from "./ShoeTile";
 import SizeButton from "./SizeButton";
 
 interface Props {
-  product: Product;
+  product: StoreProduct;
   /** Talla filtrada en el catálogo: se usa como talla por defecto si el modelo la tiene. */
   filterSize?: string;
   animation?: "reveal" | "pop";
@@ -18,10 +21,25 @@ export default function ProductCard({ product: p, filterSize = "", animation }: 
   const { inList, chosenSize, selectSize, add, remove, justAdded } = useList();
   const chosen = chosenSize(p, filterSize);
   const listed = inList(p.id);
+  const ref = useRef<HTMLElement>(null);
   const cls = "hq-tile hq-card" + (animation === "reveal" ? " hq-reveal" : animation === "pop" ? " hq-pop-card" : "");
 
+  // Cuenta una vista de producto la primera vez que la tarjeta entra en pantalla (una por sesión)
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || typeof IntersectionObserver === "undefined") return;
+    const io = new IntersectionObserver((entries) => {
+      if (entries.some((e) => e.isIntersecting)) {
+        trackOnce("p:" + p.id, { type: "vista_producto", productId: p.id });
+        io.disconnect();
+      }
+    });
+    io.observe(el);
+    return () => io.disconnect();
+  }, [p.id]);
+
   return (
-    <article className={cls} style={{ background: "#FFFFFF", border: "1px solid #F5EBFA", borderRadius: 12, padding: 12, display: "flex", flexDirection: "column", gap: 16, boxShadow: "0 10px 30px rgba(52,24,74,.06)" }}>
+    <article ref={ref} className={cls} style={{ background: "#FFFFFF", border: "1px solid #F5EBFA", borderRadius: 12, padding: 12, display: "flex", flexDirection: "column", gap: 16, boxShadow: "0 10px 30px rgba(52,24,74,.06)" }}>
       <ShoeTile product={p} ratio="100/72" width="76%" hover>
         {p.isNew && (
           <span className="hq-badge" style={{ position: "absolute", left: 12, top: 12, background: "#34184A", color: "#D6B1EC", fontSize: 12, fontWeight: 800, letterSpacing: ".08em", textTransform: "uppercase", padding: "7px 12px", borderRadius: 4 }}>
@@ -36,7 +54,7 @@ export default function ProductCard({ product: p, filterSize = "", animation }: 
           <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" style={{ flex: "none" }}>
             <circle cx="7" cy="7" r="6" fill={p.body} stroke="#34184A" strokeOpacity=".4" strokeWidth="1.5" />
           </svg>
-          <span>{p.color} · {LABELS[p.cat]}</span>
+          <span>{p.color} · {p.catName}</span>
         </div>
       </div>
 

@@ -1,9 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Bagel_Fat_One, Nunito } from "next/font/google";
-import CartDrawer from "@/components/CartDrawer";
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
-import { ListProvider } from "@/context/ListContext";
 import "./globals.css";
 
 const nunito = Nunito({ subsets: ["latin"], weight: ["500", "600", "700", "800", "900"], variable: "--font-nunito", display: "swap" });
@@ -20,12 +16,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="es" className={`${nunito.variable} ${bagel.variable}`}>
       <body>
-        <ListProvider>
-          <Header />
-          {children}
-          <Footer />
-          <CartDrawer />
-        </ListProvider>
+        {children}
       </body>
     </html>
   );

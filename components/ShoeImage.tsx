@@ -1,5 +1,5 @@
 import Image from "next/image";
-import type { Photo } from "@/data/store";
+import type { Photo } from "@/lib/types";
 
 interface Props {
   photo: Photo;

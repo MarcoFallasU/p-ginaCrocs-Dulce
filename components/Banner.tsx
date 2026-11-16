@@ -1,4 +1,4 @@
-import type { CategoryId, Photo } from "@/data/store";
+import type { Photo } from "@/lib/types";
 import Button from "./Button";
 import { ArrowIcon } from "./Icons";
 import ShoeImage from "./ShoeImage";
@@ -8,7 +8,7 @@ interface Props {
   title: string;
   sub?: string;
   subColor: string;
-  cat: CategoryId;
+  cat: string;
   label: string;
   photo: Photo;
   rotate: number;

@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { INSTAGRAM, whatsappDigits } from "@/data/store";
+import { useCatalog } from "@/context/CatalogContext";
+import { shownCategories } from "@/lib/catalog-utils";
 import { useList } from "@/context/ListContext";
 import Dots from "./Dots";
 
@@ -17,6 +19,7 @@ function Column({ title, label, children }: { title: string; label: string; chil
 }
 
 export default function Footer() {
+  const { catalog } = useCatalog();
   const { openDrawer } = useList();
   const num = whatsappDigits();
   const pretty = num.length === 11 && num.startsWith("506") ? `+506 ${num.slice(3, 7)} ${num.slice(7)}` : num ? "+" + num : "[número]";
@@ -31,8 +34,9 @@ export default function Footer() {
           </div>
           <Column title="La tienda" label="La tienda">
             <Link href="/catalogo" className="hq-link" style={LINK}>Catálogo</Link>
-            <Link href="/catalogo?cat=plataforma" className="hq-link" style={LINK}>Plataforma</Link>
-            <Link href="/catalogo?cat=ninos" className="hq-link" style={LINK}>Niños</Link>
+            {shownCategories(catalog).slice(0, 3).map((c) => (
+              <Link key={c.id} href={`/catalogo?cat=${c.id}`} className="hq-link" style={LINK}>{c.name}</Link>
+            ))}
           </Column>
           <Column title="Ayuda" label="Ayuda">
             <Link href="/#pedir" className="hq-link" style={LINK}>Cómo pedir</Link>

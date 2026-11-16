@@ -1,9 +1,11 @@
 "use client";
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
-import { byId, type Product } from "@/data/store";
+import { useCatalog } from "./CatalogContext";
+import { track } from "@/lib/track";
+import type { Product } from "@/lib/types";
 
-const KEY = "huequitos-lista";
+const DEFAULT_KEY = "huequitos-lista";
 
 interface ListEntry {
   pid: string;
@@ -26,7 +28,9 @@ interface ListContextValue {
 
 const ListContext = createContext<ListContextValue | null>(null);
 
-export function ListProvider({ children }: { children: React.ReactNode }) {
+export function ListProvider({ children, storageKey = DEFAULT_KEY }: { children: React.ReactNode; storageKey?: string }) {
+  const KEY = storageKey;
+  const { byId } = useCatalog();
   const [items, setItems] = useState<ListEntry[]>([]);
   const [sel, setSel] = useState<Record<string, string>>({});
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -42,7 +46,7 @@ export function ListProvider({ children }: { children: React.ReactNode }) {
         setSel(d.sel && typeof d.sel === "object" ? d.sel : {});
       }
     } catch {}
-  }, []);
+  }, [byId, KEY]);
 
   useEffect(() => {
     // Hidratar desde localStorage solo es posible en el cliente, después del primer render.
@@ -54,14 +58,14 @@ export function ListProvider({ children }: { children: React.ReactNode }) {
     };
     window.addEventListener("storage", onStorage);
     return () => window.removeEventListener("storage", onStorage);
-  }, [load]);
+  }, [load, KEY]);
 
   useEffect(() => {
     if (!loaded) return;
     try {
       localStorage.setItem(KEY, JSON.stringify({ list: items, sel }));
     } catch {}
-  }, [items, sel, loaded]);
+  }, [items, sel, loaded, KEY]);
 
   const value = useMemo<ListContextValue>(
     () => ({
@@ -79,9 +83,11 @@ export function ListProvider({ children }: { children: React.ReactNode }) {
         const size = sel[p.id] || (fallback && p.sizes.includes(fallback) ? fallback : "");
         setItems((l) => l.filter((e) => e.pid !== p.id).concat([{ pid: p.id, size }]));
         setJustAdded(p.id);
+        track({ type: "quiero", productId: p.id, size });
         setBumpKey((k) => k + 1);
       },
       remove: (id) => {
+        track({ type: "quitar", productId: id });
         setItems((l) => l.filter((e) => e.pid !== id));
         setJustAdded(null);
       },
