@@ -89,3 +89,17 @@ img{max-width:none}
 :focus-visible{outline:3px solid #B571DC;outline-offset:3px}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.hq-rise,.hq-draw,.hq-wiggle,.hq-hero-shoe,.hq-bloom,.hq-pop,.hq-pop-card,.hq-added,.hq-reveal,.hq-bump{animation:none !important}#hq-drawer,.hq-scrim,.hq-panel{transition:none !important}.hq-draw{stroke-dashoffset:0}.hq-press,.hq-shoe{transition:none}.hq-press:active,.hq-tile:hover .hq-shoe,.hq-cat:hover .hq-shoe{transform:none}}
 @media (prefers-reduced-transparency:reduce){.hq-bar{background:#FFFFFF;-webkit-backdrop-filter:none;backdrop-filter:none}.hq-bar::after{display:none}}
+/* ===== Administración ===== */
+.hq-tab{transition:background 120ms ease-out}
+.hq-tab:hover{background:#E7D2F4}
+.hq-text:hover{color:#8A43B5 !important}
+.hq-acc:hover,.hq-add:hover{background:#F9F4FC}
+.hq-row:hover{background:#F9F4FC}
+.hq-chev{transition:transform 300ms cubic-bezier(.22,1,.36,1)}
+@keyframes hq-open{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.hq-open{animation:hq-open 300ms cubic-bezier(.22,1,.36,1)}
+@keyframes hq-menu{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
+.hq-menu{transform-origin:24px 0;animation:hq-menu 300ms cubic-bezier(.22,1,.36,1)}
+.hq-stat{transition:width 400ms cubic-bezier(.22,1,.36,1)}
+.hq-field:focus-visible{outline:3px solid #B571DC;outline-offset:2px}
+@media (prefers-reduced-motion:reduce){.hq-tab,.hq-chev,.hq-stat{transition:none}.hq-open,.hq-menu{animation:none}}
