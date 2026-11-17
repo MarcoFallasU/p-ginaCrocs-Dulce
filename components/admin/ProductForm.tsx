@@ -5,10 +5,10 @@ import { useState } from "react";
 import Button from "@/components/Button";
 import ShoeTile from "@/components/ShoeTile";
 import SizeButton from "@/components/SizeButton";
-import { priceNumber } from "@/lib/catalog-utils";
+import { ALL_SIZES, priceNumber } from "@/lib/catalog-utils";
 import type { Photo, Product } from "@/lib/types";
 import { useAdmin } from "./AdminProvider";
-import { BackLink, CheckRow, FORM_TITLE, Field, HELP, LABEL, SelectInput, TextInput } from "./fields";
+import { BackLink, CheckRow, FORM_TITLE, Field, LABEL, SelectInput, TextInput } from "./fields";
 import PhotoUploader from "./PhotoUploader";
 
 const formatPrice = (text: string) => {
@@ -28,13 +28,13 @@ export default function ProductForm() {
   if (!creating && !existing) {
     return (
       <div style={{ paddingTop: 16, display: "flex", flexDirection: "column", gap: 12 }}>
-        <BackLink href="/admin/productos">Todos los productos</BackLink>
+        <BackLink href="/admin">Todos los productos</BackLink>
         <p style={{ margin: 0 }}>No encontré ese producto.</p>
       </div>
     );
   }
   const initial: Product = existing ?? { id: "", name: "", color: "", body: "#C3A1E0", cat: draft.categories[0]?.id ?? "", price: "", sizes: [], isNew: false, visible: true };
-  return <Form key={id} initial={initial} creating={creating} update={update} categories={draft.categories} onDone={() => router.push("/admin/productos")} />;
+  return <Form key={id} initial={initial} creating={creating} update={update} categories={draft.categories} onDone={() => router.push("/admin")} />;
 }
 
 function Form({ initial, creating, update, categories, onDone }: { initial: Product; creating: boolean; update: ReturnType<typeof useAdmin>["update"]; categories: ReturnType<typeof useAdmin>["draft"]["categories"]; onDone: () => void }) {
@@ -58,7 +58,7 @@ function Form({ initial, creating, update, categories, onDone }: { initial: Prod
   if (categories.length === 0) {
     return (
       <div style={{ paddingTop: 16, display: "flex", flexDirection: "column", gap: 12 }}>
-        <BackLink href="/admin/productos">Todos los productos</BackLink>
+        <BackLink href="/admin">Todos los productos</BackLink>
         <p style={{ margin: 0 }}>Antes de crear un producto necesitás al menos una categoría.</p>
         <Button href="/admin/categorias/nueva" style={{ alignSelf: "flex-start" }}>Crear categoría</Button>
       </div>
@@ -68,7 +68,7 @@ function Form({ initial, creating, update, categories, onDone }: { initial: Prod
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 32, paddingTop: 8 }}>
       <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-        <BackLink href="/admin/productos">Todos los productos</BackLink>
+        <BackLink href="/admin">Todos los productos</BackLink>
         <h2 style={FORM_TITLE}>{creating ? "Nuevo producto" : `Editar ${initial.name} ${initial.color}`}</h2>
       </div>
 
@@ -78,7 +78,6 @@ function Form({ initial, creating, update, categories, onDone }: { initial: Prod
             <ShoeTile product={{ ...p, price: "" }} ratio="4 / 3" width="62%" />
           </div>
           <PhotoUploader label={p.photo ? "Reemplazar foto" : "Subir foto"} onUploaded={(photo: Photo) => set("photo", photo)} />
-          <p style={{ margin: 0, fontSize: 15, color: "#604872" }}>Subí la foto con fondo transparente. El sitio la guarda en WebP a 1920 px como máximo y genera la miniatura de 400 px.</p>
         </section>
 
         <section aria-label="Datos del producto" style={{ flex: "999 1 420px", minWidth: 0, display: "flex", flexDirection: "column", gap: 28 }}>
@@ -86,7 +85,7 @@ function Form({ initial, creating, update, categories, onDone }: { initial: Prod
             <Field label="Nombre" htmlFor="nombre">
               <TextInput id="nombre" value={p.name} onChange={(e) => set("name", e.target.value)} maxLength={80} />
             </Field>
-            <Field label="Color" htmlFor="color" help="El fondo de la foto sale de este color.">
+            <Field label="Color" htmlFor="color">
               <div style={{ display: "flex", gap: 8 }}>
                 <TextInput id="color" value={p.color} onChange={(e) => set("color", e.target.value)} maxLength={40} style={{ flex: 1 }} />
                 <input type="color" aria-label="Color real del zapato" value={p.body} onChange={(e) => set("body", e.target.value.toUpperCase())} style={{ flex: "none", width: 52, height: 52, boxSizing: "border-box", padding: 4, border: "2px solid #E7D2F4", borderRadius: 6, background: "#F9F4FC", cursor: "pointer" }} />
@@ -100,7 +99,7 @@ function Form({ initial, creating, update, categories, onDone }: { initial: Prod
                 {categories.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
               </SelectInput>
             </Field>
-            <Field label="Precio" htmlFor="precio" help="Si lo dejás vacío, la tienda muestra ₡XX.XXX.">
+            <Field label="Precio" htmlFor="precio">
               <div style={{ display: "flex", alignItems: "center", gap: 8, height: 52, boxSizing: "border-box", padding: "0 14px", border: "2px solid #E7D2F4", borderRadius: 6, background: "#F9F4FC" }}>
                 <span aria-hidden="true" style={{ fontWeight: 800 }}>₡</span>
                 <TextInput id="precio" inputMode="numeric" placeholder="25.000" value={p.price} onChange={(e) => set("price", e.target.value)} style={{ flex: 1, height: "auto", border: 0, background: "transparent", padding: 0, fontWeight: 800, fontVariantNumeric: "tabular-nums" }} />
@@ -110,14 +109,13 @@ function Form({ initial, creating, update, categories, onDone }: { initial: Prod
 
           <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
             <span id="tallas-label" style={LABEL}>Tallas disponibles</span>
-            {cat && cat.sizes.length > 0 ? (
+            {cat?.sized ? (
               <>
                 <div role="group" aria-labelledby="tallas-label" style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-                  {cat.sizes.map((z) => (
+                  {ALL_SIZES.map((z) => (
                     <SizeButton key={z} size={z} active={p.sizes.includes(z)} onClick={() => setP((s) => ({ ...s, sizes: s.sizes.includes(z) ? s.sizes.filter((x) => x !== z) : [...s.sizes, z] }))} />
                   ))}
                 </div>
-                <span style={HELP}>Marcá las tallas que realmente tenés. Las demás no aparecen en la tienda.</span>
               </>
             ) : (
               <p style={{ margin: 0, padding: "14px 16px", borderRadius: 8, background: "#F9F4FC", fontSize: 15, color: "#604872" }}>La categoría {cat?.name} no lleva tallas.</p>
@@ -131,10 +129,8 @@ function Form({ initial, creating, update, categories, onDone }: { initial: Prod
 
           <div style={{ display: "flex", alignItems: "center", gap: "12px 20px", flexWrap: "wrap", paddingTop: 24, borderTop: "2px solid #F3E8F9" }}>
             <Button onClick={() => void save()} disabled={saving} style={{ height: 56, padding: "0 24px" }}>{saving ? "Guardando…" : "Guardar borrador"}</Button>
-            <Button href="/admin/productos" variant="outline" style={{ height: 52, minHeight: 52, padding: "0 20px", fontSize: 14 }}>Cancelar</Button>
-            <span role={problem ? "alert" : undefined} style={{ flex: "1 1 240px", fontSize: 15, color: problem ? "#8A43B5" : "#604872", fontWeight: problem ? 800 : 600 }}>
-              {problem || "Queda como borrador. La tienda no cambia hasta que toqués «Publicar»."}
-            </span>
+            <Button href="/admin" variant="outline" style={{ height: 52, minHeight: 52, padding: "0 20px", fontSize: 14 }}>Cancelar</Button>
+            {problem && <span role="alert" style={{ fontSize: 15, fontWeight: 800, color: "#8A43B5" }}>{problem}</span>}
           </div>
         </section>
       </div>

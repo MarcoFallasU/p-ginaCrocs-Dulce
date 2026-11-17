@@ -7,7 +7,7 @@ export function toStorefront(c: Catalog): StoreCatalog {
     .filter((p) => p.visible && cats.has(p.cat))
     .map((p) => {
       const cat = cats.get(p.cat)!;
-      return { ...p, catName: cat.name, noSize: cat.sizes.length === 0 };
+      return { ...p, catName: cat.name, noSize: !cat.sized };
     });
   const ids = new Set(products.map((p) => p.id));
   return { categories: c.categories, products, featured: c.featured.filter((id) => ids.has(id)) };
@@ -17,6 +17,9 @@ export function toStorefront(c: Catalog): StoreCatalog {
 export function shownCategories(c: StoreCatalog): Category[] {
   return c.categories.filter((cat) => c.products.some((p) => p.cat === cat.id));
 }
+
+/** Tallas que se pueden marcar al crear o editar un producto. */
+export const ALL_SIZES = Array.from({ length: 32 }, (_, i) => String(17 + i)); // 17 a 48
 
 function sortedSizes(products: Pick<Product, "sizes">[]): string[] {
   const zs = new Set<string>();

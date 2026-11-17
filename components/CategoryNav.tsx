@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { shownCategories } from "@/lib/catalog-utils";
-import { paletteOf } from "@/lib/palettes";
+import { colorsOf } from "@/lib/palettes";
 import type { Category, StoreCatalog } from "@/lib/types";
 import ShoeImage from "./ShoeImage";
 
@@ -25,7 +25,7 @@ function CategoryPicture({ cat, catalog }: { cat: Category | null; catalog: Stor
 export default function CategoryNav({ catalog }: { catalog: StoreCatalog }) {
   const items: { id: string; label: string; cat: Category | null; bg: string }[] = [
     { id: "todos", label: "Todos", cat: null, bg: "#EDDDF7" },
-    ...shownCategories(catalog).map((c) => ({ id: c.id, label: c.name, cat: c, bg: paletteOf(c.palette).bg })),
+    ...shownCategories(catalog).map((c) => ({ id: c.id, label: c.name, cat: c, bg: colorsOf(c.color).bg })),
   ];
   return (
     <nav id="hq-catnav" aria-label="Categorías" style={{ position: "relative", margin: "-76px clamp(12px,4vw,56px) 0", background: "#FFFFFF", borderRadius: 16, boxShadow: "0 16px 44px rgba(52,24,74,.12)", padding: "16px 20px", display: "flex", flexWrap: "wrap", justifyContent: "space-around", gap: "8px 12px" }}>

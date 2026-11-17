@@ -1,5 +1,6 @@
-import { redirect } from "next/navigation";
+import ProductsList from "@/components/admin/ProductsList";
 
-export default function AdminIndex() {
-  redirect("/admin/productos");
+/** /admin es la página principal del portal y muestra la pestaña Productos. */
+export default function AdminHome() {
+  return <ProductsList />;
 }

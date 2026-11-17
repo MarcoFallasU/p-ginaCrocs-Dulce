@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Button from "@/components/Button";
 import { PlusIcon } from "@/components/Icons";
-import { paletteOf } from "@/lib/palettes";
+import { colorsOf } from "@/lib/palettes";
 import { useAdmin } from "./AdminProvider";
 import ProductThumb from "./ProductThumb";
 
@@ -25,13 +25,10 @@ export default function CategoriesList() {
               <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                 <button type="button" aria-expanded={on} aria-label={`${on ? "Ocultar" : "Ver"} los productos de ${c.name}`} onClick={() => setOpen((o) => ({ ...o, [c.id]: !on }))} className="hq-acc" style={{ flex: 1, minWidth: 0, boxSizing: "border-box", padding: "20px 8px", display: "flex", alignItems: "center", gap: 20, border: 0, borderRadius: 8, background: "transparent", color: "#34184A", font: "inherit", textAlign: "left", cursor: "pointer" }}>
                   <span aria-hidden="true" style={{ flex: "none" }}>
-                    <ProductThumb photo={c.photo ?? first?.photo} body={paletteOf(c.palette).bg} bg={paletteOf(c.palette).bg} width={88} round />
+                    <ProductThumb photo={c.photo ?? first?.photo} body={colorsOf(c.color).bg} bg={colorsOf(c.color).bg} width={88} round />
                   </span>
                   <span style={{ flex: 1, minWidth: 0, display: "flex", flexDirection: "column", gap: 2 }}>
                     <span style={{ fontSize: 18, fontWeight: 900, letterSpacing: ".04em", textTransform: "uppercase", lineHeight: 1.25 }}>{c.name}</span>
-                    <span style={{ fontSize: 15, fontWeight: 600, color: "#604872" }}>
-                      {products.length} {products.length === 1 ? "producto" : "productos"} · {c.sizes.length ? `${c.sizes.length} tallas` : "sin tallas"}
-                    </span>
                   </span>
                   <span aria-hidden="true" className="hq-chev" style={{ flex: "none", width: 46, height: 46, display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "50%", background: "#F9F4FC", transform: `rotate(${on ? 180 : 0}deg)` }}>
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"><path d="M6 9l6 6 6-6" /></svg>

@@ -55,7 +55,6 @@ export default function StatsView() {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 48, paddingTop: 16 }}>
       <section aria-label="Consulta" style={{ display: "flex", flexDirection: "column", gap: 28 }}>
-        <p style={{ margin: 0, fontSize: 15, color: "#604872" }}>Los eventos son anónimos y guardan los atributos del producto en ese momento.</p>
 
         <div style={{ display: "flex", alignItems: "flex-end", gap: 16, flexWrap: "wrap" }}>
           <Field label="Qué se mide" htmlFor="evento">
@@ -86,7 +85,6 @@ export default function StatsView() {
             </SelectInput>
           </Field>
         </div>
-        {data && <p style={{ margin: "-12px 0 0", fontSize: 15, color: "#604872" }}>{data.hint}</p>}
         {failed && <p role="alert" style={{ margin: 0, fontWeight: 700, color: "#8A43B5" }}>No se pudieron cargar las estadísticas.</p>}
 
         {data && (
@@ -119,7 +117,6 @@ export default function StatsView() {
           />
         )}
         {base === 0 && data && <p style={{ margin: 0, color: "#604872" }}>Este producto todavía no tiene vistas en el periodo.</p>}
-        <p style={{ margin: 0, maxWidth: 640, fontSize: 15, color: "#604872" }}>Un clic en «Pedir por WhatsApp» cuenta como intención de compra. Todavía no es una venta confirmada.</p>
       </section>
     </div>
   );

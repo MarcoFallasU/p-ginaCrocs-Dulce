@@ -10,7 +10,7 @@ import { useAdmin } from "./AdminProvider";
 
 /** La tienda renderizada con el borrador: no publica nada ni cuenta estadísticas. */
 export default function PreviewView() {
-  const { draft, changes } = useAdmin();
+  const { draft } = useAdmin();
   const [page, setPage] = useState<"inicio" | "catalogo">("inicio");
   const catalog = useMemo(() => toStorefront(draft), [draft]);
 
@@ -24,9 +24,6 @@ export default function PreviewView() {
             </button>
           ))}
         </div>
-        <span style={{ fontSize: 15, color: "#604872" }}>
-          {changes.count ? `Así se vería con los ${changes.count} cambios sin publicar.` : "No hay cambios: esto es lo que ya está publicado."}
-        </span>
       </div>
       <div style={{ border: "2px dashed #E7D2F4", borderRadius: 16, overflow: "hidden", background: "#FFFFFF", padding: "8px 0" }}>
         <CatalogProvider catalog={catalog}>

@@ -25,12 +25,10 @@ export default function FeaturedEditor() {
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 40, paddingTop: 16 }}>
-      <p style={{ margin: 0, maxWidth: 640, fontSize: 17, color: "#604872" }}>Elegí los productos de «Los modelos de hoy». Salen en el inicio en este orden.</p>
 
       <section aria-label="En el inicio" style={{ display: "flex", flexDirection: "column" }}>
         <h2 style={H2}>
           Los modelos de hoy
-          <span aria-live="polite" style={{ fontSize: 13, fontWeight: 800, letterSpacing: ".06em", color: "#604872", fontVariantNumeric: "tabular-nums" }}>{chosen.length === 1 ? "1 producto" : `${chosen.length} productos`}</span>
         </h2>
         {chosen.length === 0 && <p style={{ margin: 0, padding: "20px 0", color: "#604872" }}>Todavía no hay destacados. Elegí algunos abajo.</p>}
         {chosen.map((p, i) => {

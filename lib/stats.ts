@@ -49,9 +49,9 @@ const WEEK = 7 * 24 * 3600 * 1000;
 export function groupOptionsFor(event: string, catId: string, catalog: Catalog): GroupId[] {
   if (event === "vistas") return ["categoria"];
   if (event === "filtros") return ["filtro"];
-  if (catId === "todas") return ["categoria", "color", "precio", ...(catalog.categories.some((c) => c.sizes.length) ? (["talla"] as GroupId[]) : [])];
+  if (catId === "todas") return ["categoria", "color", "precio", ...(catalog.categories.some((c) => c.sized) ? (["talla"] as GroupId[]) : [])];
   const cat = catalog.categories.find((c) => c.id === catId);
-  return ["color", "precio", ...(cat && cat.sizes.length ? (["talla"] as GroupId[]) : [])];
+  return ["color", "precio", ...(cat?.sized ? (["talla"] as GroupId[]) : [])];
 }
 
 export function computeStats(events: StatEvent[], catalog: Catalog, q: StatsQuery, now = Date.now()): StatsResult {
@@ -70,7 +70,7 @@ export function computeStats(events: StatEvent[], catalog: Catalog, q: StatsQuer
   else if (group === "color") known = [...new Set(catalog.products.filter((p) => all || p.cat === cat!.id).map((p) => p.color).filter(Boolean))];
   else if (group === "precio") { known = PRICE_RANGES; ordered = true; }
   else if (group === "talla") {
-    known = [...new Set(catList.flatMap((c) => c.sizes))].sort((a, b) => Number(a) - Number(b));
+    known = [...new Set(catalog.products.filter((p) => catList.some((c) => c.id === p.cat)).flatMap((p) => p.sizes))].sort((a, b) => Number(a) - Number(b));
     ordered = true;
   } else if (group === "filtro") known = ["Categoría", "Talla"];
 
