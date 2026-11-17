@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { AdminProvider } from "@/components/admin/AdminProvider";
-import AdminShell from "@/components/admin/AdminShell";
+import { Suspense } from "react";
+import AdminShell, { AdminShellFallback } from "@/components/admin/AdminShell";
 
 export const metadata: Metadata = { title: "Administración · Dulce Crocs", robots: { index: false, follow: false } };
 
@@ -9,7 +10,10 @@ export const metadata: Metadata = { title: "Administración · Dulce Crocs", rob
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
     <AdminProvider>
-      <AdminShell>{children}</AdminShell>
+      {/* El fallback es el mismo shell: aunque se muestre, cabecera y pestañas no desaparecen */}
+      <Suspense fallback={<AdminShellFallback />}>
+        <AdminShell>{children}</AdminShell>
+      </Suspense>
     </AdminProvider>
   );
 }

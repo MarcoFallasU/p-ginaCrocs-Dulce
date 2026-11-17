@@ -9,8 +9,17 @@ import AdminSkeleton from "./AdminSkeleton";
 import TabsNav, { activeTabIndex } from "./TabsNav";
 import TabTransition from "./TabTransition";
 
+/** Shell con la ruta leída del navegador. `usePathname` es dato de ejecución en rutas dinámicas, por eso el layout lo envuelve en Suspense. */
 export default function AdminShell({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname();
+  return <AdminShellView pathname={usePathname()}>{children}</AdminShellView>;
+}
+
+/** Lo que se pinta mientras la ruta aún no se conoce (HTML prerenderizado): el mismo shell, con el contenido en carga. */
+export function AdminShellFallback() {
+  return <AdminShellView pathname="/admin"><AdminSkeleton /></AdminShellView>;
+}
+
+function AdminShellView({ pathname, children }: { pathname: string; children: React.ReactNode }) {
   const active = activeTabIndex(pathname);
   const { changes, busy, publish, discard, error, ready } = useAdmin();
 
