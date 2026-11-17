@@ -19,15 +19,12 @@ export default function ProductsList() {
   const catName = (id: string) => draft.categories.find((c) => c.id === id)?.name ?? id;
   const needle = q.trim().toLowerCase();
   const list = draft.products.filter((p) => (cat === "todos" || p.cat === cat) && (!needle || `${p.name} ${p.color}`.toLowerCase().includes(needle)));
-  const hidden = draft.products.filter((p) => !p.visible).length;
-  const count = `${draft.products.length} ${draft.products.length === 1 ? "producto" : "productos"}, ${hidden === 1 ? "1 oculto" : hidden + " ocultos"}`;
 
   const toggle = (id: string) => void update((c) => ({ ...c, products: c.products.map((p) => (p.id === id ? { ...p, visible: !p.visible } : p)) }));
 
   return (
     <>
       <div style={{ display: "flex", flexDirection: "column", gap: 24, paddingTop: 16 }}>
-        <p aria-live="polite" style={{ margin: 0, fontSize: 17, color: "#604872" }}>{count}</p>
         <div style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
           <div role="group" aria-label="Filtrar por categoría" style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
             {[{ id: "todos", name: "Todos" }, ...draft.categories].map((c) => (
