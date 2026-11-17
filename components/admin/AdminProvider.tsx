@@ -76,11 +76,11 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
     setBusy(true);
     try {
       const res = await fetch("/api/admin/publish", { method: "POST" });
-      if (!res.ok) throw new Error();
+      if (!res.ok) throw new Error(((await res.json().catch(() => ({}))) as { error?: string }).error);
       await load();
       return true;
-    } catch {
-      setError("No se pudo publicar.");
+    } catch (e) {
+      setError(e instanceof Error && e.message ? e.message : "No se pudo publicar.");
       return false;
     } finally {
       setBusy(false);

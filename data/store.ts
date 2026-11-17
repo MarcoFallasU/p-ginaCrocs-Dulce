@@ -10,7 +10,7 @@ export const INSTAGRAM = "[@usuario]";
 export const PRICE_PLACEHOLDER = "₡XX.XXX";
 
 /** Foto del hero del inicio. */
-export const HERO_PHOTO = { src: "/img/rosado.webp", width: 1100, height: 591 };
+export const HERO_PHOTO = { src: "/img/morado.webp", width: 1639, height: 960 };
 
 export function tintOf(hex: string): string {
   const n = parseInt(hex.slice(1), 16);
