@@ -31,9 +31,6 @@ export default function HomeView({ catalog }: { catalog: StoreCatalog }) {
               <h1 className="display hq-rise" style={{ margin: 0, maxWidth: "10ch", fontSize: "clamp(48px,6.6vw,100px)", lineHeight: 1 }}>
                 <span style={{ position: "relative", display: "inline-block" }}>
                   Crocs
-                  <svg viewBox="0 0 200 100" preserveAspectRatio="none" aria-hidden="true" style={{ position: "absolute", left: "-9%", top: "-6%", width: "118%", height: "116%", overflow: "visible", pointerEvents: "none" }}>
-                    <path className="hq-draw" pathLength={1} d="M168 90 C118 104 28 98 10 62 C-4 32 44 4 108 4 C172 4 204 30 194 58 C188 76 172 86 140 92" fill="none" stroke="#B571DC" strokeWidth="3" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
-                  </svg>
                 </span>{" "}
                 para grandes y{" "}
                 <span className="hq-wiggle" style={{ display: "inline-block", color: "#B571DC", transform: "rotate(-3deg)" }}>chiquitos</span>
