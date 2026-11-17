@@ -4,54 +4,29 @@
       "id": "clasicos",
       "name": "Clásicos",
       "description": "",
-      "palette": "lila-superficie",
-      "sizes": [
-        "36",
-        "37",
-        "38",
-        "39",
-        "40",
-        "41",
-        "42"
-      ]
+      "color": "#F3E8F9",
+      "sized": true
     },
     {
       "id": "plataforma",
       "name": "Plataforma",
       "description": "Más altura, mismo confort",
-      "palette": "lila-banner",
-      "sizes": [
-        "36",
-        "37",
-        "38",
-        "39",
-        "40",
-        "41"
-      ]
+      "color": "#E3C9F2",
+      "sized": true
     },
     {
       "id": "bolsos",
       "name": "Bolsos",
       "description": "",
-      "palette": "lila-claro",
-      "sizes": []
+      "color": "#EDDDF7",
+      "sized": false
     },
     {
       "id": "ninos",
       "name": "Niños",
       "description": "",
-      "palette": "amarillo",
-      "sizes": [
-        "24",
-        "25",
-        "26",
-        "27",
-        "28",
-        "29",
-        "30",
-        "31",
-        "32"
-      ]
+      "color": "#FDEBA0",
+      "sized": true
     }
   ],
   "products": [

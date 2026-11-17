@@ -10,9 +10,10 @@ export interface Category {
   id: string;
   name: string;
   description: string;
-  palette: PaletteId;
-  /** Tallas que ofrece la categoría. Vacío = la categoría no lleva tallas. */
-  sizes: string[];
+  /** Color de fondo de la categoría (hex). Pinta su cabecera y su círculo en el inicio. */
+  color: string;
+  /** Si los productos de la categoría llevan talla (zapatos sí, bolsos no). Las tallas concretas se eligen en cada producto. */
+  sized: boolean;
   photo?: Photo;
 }
 
@@ -39,8 +40,6 @@ export interface Catalog {
   /** IDs de producto de «Los modelos de hoy», en orden. */
   featured: string[];
 }
-
-export type PaletteId = "lila-superficie" | "lila-claro" | "lila-banner" | "morado" | "amarillo" | "tinta";
 
 /** Producto tal como lo consume la tienda (ya resuelto contra su categoría). */
 export interface StoreProduct extends Product {

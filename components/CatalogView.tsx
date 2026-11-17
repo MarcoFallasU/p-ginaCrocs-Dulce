@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { modelsWord } from "@/data/store";
 import { useCatalog } from "@/context/CatalogContext";
 import { allSizes, shownCategories } from "@/lib/catalog-utils";
-import { paletteOf } from "@/lib/palettes";
+import { colorsOf } from "@/lib/palettes";
 import { track } from "@/lib/track";
 import Button from "./Button";
 import ProductGrid from "./ProductGrid";
@@ -20,7 +20,7 @@ export default function CatalogView({ initialCat = "todos" }: { initialCat?: str
   const [size, setSize] = useState("");
 
   const current = cats.find((c) => c.id === cat);
-  const palette = paletteOf(current?.palette ?? "lila-superficie");
+  const palette = colorsOf(current?.color);
   const filtered = cat !== "todos" || !!size;
   const list = catalog.products.filter((p) => (cat === "todos" || p.cat === cat) && (!size || p.sizes.includes(size)));
   const clear = () => { setCat("todos"); setSize(""); };
