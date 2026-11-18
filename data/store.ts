@@ -3,7 +3,7 @@
  * (versión publicada en data/db/catalog.json). */
 
 // Número de WhatsApp con código de país, solo números. Ejemplo: 50688887777
-export const WHATSAPP = "";
+export const WHATSAPP = "50685060808";
 // Usuario de Instagram, por ejemplo @huequitos.cr
 export const INSTAGRAM = "[@usuario]";
 
