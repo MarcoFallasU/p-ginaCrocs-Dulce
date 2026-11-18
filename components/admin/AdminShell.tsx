@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { Suspense } from "react";
 import { usePathname } from "next/navigation";
 import Button from "@/components/Button";
@@ -28,7 +29,9 @@ function AdminShellView({ pathname, children }: { pathname: string; children: Re
       <div style={{ maxWidth: 1280, margin: "0 auto", boxSizing: "border-box", padding: "24px 24px 56px", display: "flex", flexDirection: "column" }}>
         <header style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, flexWrap: "wrap", paddingBottom: 32 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-            <Logo size={40} />
+            <Link href="/">
+              <Logo size={40} />
+            </Link>
             <span style={{ fontSize: 13, fontWeight: 900, letterSpacing: ".1em", textTransform: "uppercase" }}>Administración</span>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
