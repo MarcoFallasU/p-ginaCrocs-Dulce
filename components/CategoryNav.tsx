@@ -15,9 +15,9 @@ function CategoryPicture({ cat, catalog }: { cat: Category | null; catalog: Stor
   const abs = (css: React.CSSProperties): React.CSSProperties => ({ position: "absolute", ...css });
   return (
     <span className="hq-shoe" aria-hidden="true" style={{ position: "relative", display: "block", width: "100%", height: "100%" }}>
-      {a?.photo && <ShoeImage photo={a.photo} rotate={-16} sizes="60px" style={abs({ left: "2%", top: "14%", width: "58%" })} />}
-      {b?.photo && <ShoeImage photo={b.photo} rotate={12} sizes="60px" style={abs({ right: 0, top: "22%", width: "58%" })} />}
-      {c?.photo && <ShoeImage photo={c.photo} rotate={-4} sizes="60px" style={abs({ left: "20%", bottom: "12%", width: "60%" })} />}
+      {a?.photo && <ShoeImage photo={a.photo} rotate={0} sizes="60px" style={abs({ left: "2%", top: "14%", width: "58%" })} />}
+      {b?.photo && <ShoeImage photo={b.photo} rotate={0} sizes="60px" style={abs({ right: 0, top: "22%", width: "58%" })} />}
+      {c?.photo && <ShoeImage photo={c.photo} rotate={0} sizes="60px" style={abs({ left: "20%", bottom: "12%", width: "60%" })} />}
     </span>
   );
 }

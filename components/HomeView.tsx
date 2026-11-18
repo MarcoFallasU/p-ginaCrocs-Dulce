@@ -38,7 +38,7 @@ export default function HomeView({ catalog }: { catalog: StoreCatalog }) {
             </div>
             <div aria-hidden="true" style={{ flex: "1 1 380px", minWidth: 0, position: "relative", minHeight: 340, display: "flex", alignItems: "center", justifyContent: "center" }}>
               <span className="hq-bloom" style={{ position: "absolute", width: "min(400px,92%)", aspectRatio: "1/1", borderRadius: "50%", background: "rgba(255,255,255,.72)" }} />
-              <ShoeImage photo={HERO_PHOTO} rotate={-10} priority sizes="(max-width: 700px) 100vw, 600px" shadow="drop-shadow(0 30px 24px rgba(52,24,74,.24))" className="hq-hero-shoe" style={{ position: "relative", width: "108%", maxWidth: 600 }} />
+              <ShoeImage photo={HERO_PHOTO} rotate={0} priority sizes="(max-width: 700px) 100vw, 600px" shadow="drop-shadow(0 30px 24px rgba(52,24,74,.24))" className="hq-hero-shoe" style={{ position: "relative", width: "108%", maxWidth: 600 }} />
             </div>
           </div>
           <CategoryNav catalog={catalog} />

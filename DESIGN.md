@@ -63,7 +63,7 @@ Color de producto:
 ## 6. Imágenes de producto
 
 - Fotos en WebP con fondo transparente, en `public/img/`, declaradas en `IMG` de `data/store.ts` con ancho y alto reales.
-- Siempre se muestran rotadas (≈ −6° a −10°) con `drop-shadow`, dentro de una caja con el tinte del producto. Usar `ShoeImage` y `ShoeTile`, no `<Image>` suelto.
+- Se muestran derechas (sin rotación) con `drop-shadow`, dentro de una caja con el tinte del producto. Usar `ShoeImage` y `ShoeTile`, no `<Image>` suelto.
 - Usar `next/image` (vía `ShoeImage`) con `sizes` realista. Solo la imagen del hero lleva `priority`.
 - Imágenes decorativas: `alt=""`. Imagen de producto en tarjeta: `alt="<nombre> <color>"`.
 - Subidas nuevas: endpoint `app/api/upload` (WebP, 1920 px máx. + miniatura de 400 px).
@@ -77,7 +77,7 @@ Reutiliza antes de crear. Todos en `components/` (sin subcarpetas por ahora).
 | `Button` | Botón o enlace. Variantes `primary` (tinta), `soft` (lila, acción «Lo quiero»), `outline` (borde tinta). Con `href` renderiza `Link`. |
 | `SizeButton` | Botón circular de talla; activo = fondo tinta y texto blanco. Usado en tarjetas y filtros. |
 | `ProductCard` / `ProductGrid` | Tarjeta de modelo y su cuadrícula (`auto-fill`, mínimo 280–340 px). |
-| `ShoeImage` / `ShoeTile` | Foto rotada con sombra / caja con tinte del producto. |
+| `ShoeImage` / `ShoeTile` | Foto derecha con sombra / caja con tinte del producto. |
 | `Banner` | Bloque destacado con título, subtexto, botón y foto. |
 | `CategoryNav` | Barra flotante de categorías con miniaturas circulares sobre el hero. |
 | `SectionHeading`, `StepCard` | Título de sección `.display` y paso numerado con borde superior tinta. |

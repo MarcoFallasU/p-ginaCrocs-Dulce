@@ -28,6 +28,6 @@ export function whatsappDigits(): string {
 
 /** Banners del inicio (los edita el dev). Un banner solo sale si su categoría tiene productos visibles. */
 export const BANNERS = [
-  { cat: "plataforma", bg: "#E3C9F2", title: "¡Ya llegaron las de plataforma!", subColor: "#45275C", label: "Ver las de plataforma", rotate: -6 },
-  { cat: "ninos", bg: "#FDEBA0", title: "Para los chiquitos", subColor: "#3B3A16", label: "Ver las de niños", rotate: -8 },
+  { cat: "plataforma", bg: "#E3C9F2", title: "¡Ya llegaron las de plataforma!", subColor: "#45275C", label: "Ver las de plataforma", rotate: 0 },
+  { cat: "ninos", bg: "#FDEBA0", title: "Para los chiquitos", subColor: "#3B3A16", label: "Ver las de niños", rotate: 0 },
 ];

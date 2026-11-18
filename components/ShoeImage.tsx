@@ -13,7 +13,7 @@ interface Props {
 }
 
 /** Foto de un modelo con la rotación y sombra de la tienda. */
-export default function ShoeImage({ photo, alt = "", rotate = -8, shadow, sizes = "(max-width: 600px) 50vw, 400px", priority, style, className }: Props) {
+export default function ShoeImage({ photo, alt = "", rotate = 0, shadow, sizes = "(max-width: 600px) 50vw, 400px", priority, style, className }: Props) {
   return (
     <Image
       src={photo.src}

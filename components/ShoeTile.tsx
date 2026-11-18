@@ -10,7 +10,7 @@ export default function ShoeTile({ product, ratio, width, hover = false, childre
         {product.photo ? <ShoeImage
           photo={product.photo}
           alt={hover ? `${product.name} ${product.color}` : ""}
-          rotate={hover ? -8 : -6}
+          rotate={0}
           shadow={hover ? "drop-shadow(0 16px 14px rgba(52,24,74,.2))" : undefined}
           sizes={hover ? "(max-width: 600px) 50vw, 340px" : "80px"}
         /> : <ShoePlaceholder color={product.body} />}
@@ -23,6 +23,6 @@ export default function ShoeTile({ product, ratio, width, hover = false, childre
 /** Marcador cuando un producto todavía no tiene foto. */
 export function ShoePlaceholder({ color }: { color: string }) {
   return (
-    <div aria-hidden="true" style={{ width: "100%", aspectRatio: "2 / 1", borderRadius: "58% 42% 46% 54% / 72% 64% 36% 28%", transform: "rotate(-8deg)", filter: "drop-shadow(0 6px 6px rgba(52,24,74,.2))", background: color }} />
+    <div aria-hidden="true" style={{ width: "100%", aspectRatio: "2 / 1", borderRadius: "58% 42% 46% 54% / 72% 64% 36% 28%", filter: "drop-shadow(0 6px 6px rgba(52,24,74,.2))", background: color }} />
   );
 }
