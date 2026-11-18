@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useList } from "@/context/ListContext";
-import Dots from "./Dots";
+import Logo from "./Logo";
 import { BagIcon } from "./Icons";
 
 const NAVLINK: React.CSSProperties = { color: "#34184A", minHeight: 44, display: "inline-flex", alignItems: "center" };
@@ -17,8 +17,8 @@ export default function Header() {
   return (
     <header className="hq-bar">
       <div className="hq-head">
-        <Link href="/" className="hq-logo" aria-label="huequitos, ir al inicio" style={{ display: "flex", alignItems: "center", gap: 10, minHeight: 44, textDecoration: "none", color: "#34184A" }}>
-          <Dots />
+        <Link href="/" className="hq-logo" aria-label="Dulce Crocs, ir al inicio" style={{ display: "flex", alignItems: "center", gap: 10, minHeight: 44, textDecoration: "none", color: "#34184A" }}>
+          <Logo size={48} />
         </Link>
         <nav className="hq-nav" aria-label="Principal" style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "0 28px", fontSize: 13, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>
           {inCatalog && <Link href="/" className="hq-link" style={NAVLINK}>Inicio</Link>}

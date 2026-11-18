@@ -3,7 +3,7 @@
 import { Suspense } from "react";
 import { usePathname } from "next/navigation";
 import Button from "@/components/Button";
-import Dots from "@/components/Dots";
+import Logo from "@/components/Logo";
 import { useAdmin } from "./AdminProvider";
 import AdminSkeleton from "./AdminSkeleton";
 import TabsNav, { activeTabIndex } from "./TabsNav";
@@ -28,7 +28,7 @@ function AdminShellView({ pathname, children }: { pathname: string; children: Re
       <div style={{ maxWidth: 1280, margin: "0 auto", boxSizing: "border-box", padding: "24px 24px 56px", display: "flex", flexDirection: "column" }}>
         <header style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, flexWrap: "wrap", paddingBottom: 32 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-            <Dots />
+            <Logo size={40} />
             <span style={{ fontSize: 13, fontWeight: 900, letterSpacing: ".1em", textTransform: "uppercase" }}>Administración</span>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}>

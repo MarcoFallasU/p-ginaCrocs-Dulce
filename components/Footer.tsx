@@ -5,7 +5,7 @@ import { INSTAGRAM, whatsappDigits } from "@/data/store";
 import { useCatalog } from "@/context/CatalogContext";
 import { shownCategories } from "@/lib/catalog-utils";
 import { useList } from "@/context/ListContext";
-import Dots from "./Dots";
+import Logo from "./Logo";
 
 const LINK: React.CSSProperties = { color: "#34184A", fontSize: 16, fontWeight: 600, minHeight: 40, display: "inline-flex", alignItems: "center" };
 
@@ -29,7 +29,7 @@ export default function Footer() {
       <div style={{ maxWidth: 1280, margin: "0 auto", padding: "56px 24px 28px", display: "flex", flexDirection: "column", gap: 36 }}>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(min(200px,100%),1fr))", gap: "32px 40px" }}>
           <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-            <Dots />
+            <Logo size={56} />
             <span style={{ fontSize: 15, lineHeight: 1.5, fontWeight: 600, color: "#604872" }}>Pedís por WhatsApp y pagás por SINPE Móvil.</span>
           </div>
           <Column title="La tienda" label="La tienda">
