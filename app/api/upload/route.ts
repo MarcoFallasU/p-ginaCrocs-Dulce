@@ -54,6 +54,13 @@ export async function POST(req: Request) {
     return NextResponse.json({ url: big.url, thumb: small.url, width, height });
   } catch (e) {
     console.error("Error al subir imagen", e);
+    // Los fallos de almacenamiento no son de la foto: se dicen claro para no buscar el problema en el archivo
+    if (e instanceof Error && /private store/i.test(e.message)) {
+      return NextResponse.json({ error: "El Blob store es privado y las fotos de la tienda deben ser públicas: crea un Blob store con acceso público y vuelve a desplegar." }, { status: 503 });
+    }
+    if (!process.env.BLOB_READ_WRITE_TOKEN || (e instanceof Error && /credentials|token/i.test(e.message))) {
+      return NextResponse.json({ error: "Falta conectar Vercel Blob: crea el Blob store en Storage y vuelve a desplegar (BLOB_READ_WRITE_TOKEN)." }, { status: 503 });
+    }
     return NextResponse.json({ error: "No se pudo procesar la imagen" }, { status: 500 });
   }
 }
