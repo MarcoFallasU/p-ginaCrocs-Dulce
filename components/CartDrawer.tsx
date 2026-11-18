@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { PRICE_PLACEHOLDER, whatsappDigits } from "@/data/store";
 import { useCatalog } from "@/context/CatalogContext";
 import { useList } from "@/context/ListContext";
+import { listUrl } from "@/lib/share";
 import { track } from "@/lib/track";
 import Button from "./Button";
 import { CloseIcon, PlaneIcon } from "./Icons";
@@ -14,6 +15,12 @@ export default function CartDrawer() {
   const { items, drawerOpen, closeDrawer, remove } = useList();
   const panelRef = useRef<HTMLDivElement>(null);
   const lastFocus = useRef<HTMLElement | null>(null);
+  // El enlace de la lista necesita el dominio real; en el servidor aún no se conoce
+  const [origin, setOrigin] = useState("");
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setOrigin(window.location.origin);
+  }, []);
 
   const entries = items.filter((l) => byId[l.pid]);
 
@@ -55,7 +62,9 @@ export default function CartDrawer() {
             const p = byId[l.pid];
             return `- ${p.name} ${p.color}` + (p.noSize ? "" : ", " + (l.size ? `talla ${l.size}` : "talla por confirmar"));
           })
-          .join("\n"),
+          .join("\n") +
+        // Enlace con vista previa: WhatsApp muestra debajo una imagen con los productos elegidos
+        (origin ? "\n\nMi lista: " + listUrl(origin, entries.map((l) => ({ pid: l.pid, size: l.size }))) : ""),
     );
 
   return (
