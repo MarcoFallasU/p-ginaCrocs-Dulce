@@ -52,9 +52,7 @@ export default function Footer() {
             <span style={{ fontSize: 16, fontWeight: 600, minHeight: 40, display: "inline-flex", alignItems: "center" }}>Instagram {INSTAGRAM}</span>
           </div>
         </div>
-        <p style={{ margin: 0, paddingTop: 20, borderTop: "1px solid #EDDDF7", fontSize: 13, lineHeight: 1.6, fontWeight: 600, color: "#604872" }}>
-          Huequitos es una tienda independiente en Costa Rica, sin relación con Crocs, Inc. ni con sus distribuidores oficiales. Crocs es una marca registrada de Crocs, Inc.
-        </p>
+        
       </div>
     </footer>
   );
